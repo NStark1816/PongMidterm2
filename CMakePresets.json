@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "Conf",
+            "displayName": "Clang 14.0.5 (MSVC CLI) for MSVC 17.3.32929.385 (Visual Studio Build Tools 2022 Release - x86)",
+            "description": "Using compilers: C = C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\Llvm\\bin\\clang-cl.exe, CXX = C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\Llvm\\bin\\clang-cl.exe",
+            "generator": "Visual Studio 17 2022",
+            "toolset": "host=x86",
+            "architecture": "win32",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/Llvm/bin/clang-cl.exe",
+                "CMAKE_CXX_COMPILER": "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/Llvm/bin/clang-cl.exe"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Conf-debug",
+            "displayName": "Clang 14.0.5 (MSVC CLI) for MSVC 17.3.32929.385 (Visual Studio Build Tools 2022 Release - x86) - Debug",
+            "configurePreset": "Conf",
+            "configuration": "Debug"
+        }
+    ]
+}
