@@ -9,6 +9,7 @@ out vec4 fragmentColor;
 out vec2 fragmentUV;
 
 uniform mat4 P;
+uniform float TIME;
 
 void main()
 {

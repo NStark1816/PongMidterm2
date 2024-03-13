@@ -11,11 +11,23 @@ in vec2 fragmentUV;
 out vec4 color;
 
 uniform sampler2D mySampler;
+uniform float TIME;
 
 void main() {
-	vec4 textureColor = texture(mySampler, fragmentUV);
+	vec2 movedUV = fragmentUV + vec2(TIME, TIME);
+	vec4 textureColor = texture(mySampler, movedUV);
 
 	//color = textureColor * fragmentColor;
+
+	// Note: make the ball and paddles white and background have no white
+	if(textureColor == vec4(1.0, 1.0, 1.0, 1.0))
+	{
+
+	}
+	else
+	{
+
+	}
 
 	color = fragmentColor * textureColor;
 }

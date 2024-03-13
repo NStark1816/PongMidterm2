@@ -26,7 +26,10 @@ public:
 
     void OnUpdate(float _dt)
     {
-        
+        if(GetInputManager().GetKey(SDL_SCANCODE_W))
+        {
+            Canis::Log("DOWN");
+        }
     }
 };
 
