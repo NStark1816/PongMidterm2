@@ -7,6 +7,8 @@
 class Paddle : public Canis::ScriptableEntity
 {
 private:
+    glm::vec2   m_direction;
+    float       m_speed;
     
 public:
     void OnCreate()
@@ -29,7 +31,16 @@ public:
         if(GetInputManager().GetKey(SDL_SCANCODE_W))
         {
             Canis::Log("DOWN");
+            m_direction = glm::vec2(0.0f, 1.0f);
+            m_speed = 150.0f;
         }
+        else
+        {
+            m_direction = glm::vec2(0.0f, 0.0f);
+            m_speed = 0;
+        }
+
+        rect.position += (m_direction * (m_speed * _dt));
     }
 };
 

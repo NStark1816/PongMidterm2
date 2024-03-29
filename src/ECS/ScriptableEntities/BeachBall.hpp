@@ -63,15 +63,6 @@ public:
         {
             GetScene().Instantiate("assets/prefebs/test_character.scene");
         }
-
-        if(GetInputManager().GetKey(SDL_SCANCODE_W))
-        {
-            Canis::Log("DOWN");
-        }
-        else
-        {
-            Canis::Log("UP");
-        }
     }
 };
 

@@ -56,8 +56,8 @@ Entities:
     Canis::RectTransformComponent:
       active: true
       anchor: 6
-      position: [-625.0, 0.0]
-      size: [80.0, 50.0]
+      position: [-600.0, 0.0]
+      size: [25.0, 100.0]
       originOffset: [0.0, 0.0]
       rotation: 0
       scale: 1.0
@@ -74,3 +74,25 @@ Entities:
       mask: 0
     Canis::ScriptComponent: Paddle
     Canis::TagComponent: LEFTPADDLE
+  - 4:
+    Canis::RectTransformComponent:
+      active: true
+      anchor: 6
+      position: [600.0, 0.0]
+      size: [25.0, 100.0]
+      originOffset: [0.0, 0.0]
+      rotation: 0
+      scale: 1.0
+      depth: 0.1
+    Canis::ColorComponent:
+      color: [1.0, 1.0, 1.0, 1.0]
+    Canis::Sprite2DComponent:
+      uv: [0.16, 0.0, 0.16, 0.24]
+      texture: "assets/textures/beach_ball.png"
+    Canis::CircleColliderComponent:
+      center: [0.0, 0.0]
+      radius: 128.0
+      layer: 0
+      mask: 0
+    Canis::ScriptComponent: Paddle
+    Canis::TagComponent: RIGHTPADDLE
