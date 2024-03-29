@@ -28,11 +28,30 @@ public:
 
     void OnUpdate(float _dt)
     {
+        auto& rect = GetComponent<Canis::RectTransformComponent>();
+        float halfSizeY = rect.size.y/2.0f;
+
         if(GetInputManager().GetKey(SDL_SCANCODE_W))
         {
-            Canis::Log("DOWN");
-            m_direction = glm::vec2(0.0f, 1.0f);
-            m_speed = 150.0f;
+            if(!(rect.position.y + halfSizeY >= GetWindow().GetScreenHeight()/2.0f)){
+                m_direction = glm::vec2(0.0f, 1.0f);
+                m_speed = 150.0f;
+            }
+            else{
+                m_direction = glm::vec2(0.0f, 0.0f);
+                m_speed = 0;
+            }
+        }
+        else if(GetInputManager().GetKey(SDL_SCANCODE_S))
+        {
+            if(!(rect.position.y - halfSizeY <= GetWindow().GetScreenHeight()/-2.0f)){
+                m_direction = glm::vec2(0.0f, -1.0f);
+                m_speed = 150.0f;
+            }
+            else{
+                m_direction = glm::vec2(0.0f, 0.0f);
+                m_speed = 0;
+            }
         }
         else
         {
