@@ -34,9 +34,12 @@ public:
     {
         using namespace Canis;
         Canis::Entity leftPaddle = entity.GetEntityWithTag("LEFTPADDLE");
+        Canis::Entity rightPaddle = entity.GetEntityWithTag("RIGHTPADDLE");
         auto& rectLeftPaddle = leftPaddle.GetComponent<Canis::RectTransformComponent>();
+        auto& rectRightPaddle = rightPaddle.GetComponent<Canis::RectTransformComponent>();
         auto& colorLeftPaddle = leftPaddle.GetComponent<Canis::ColorComponent>();
         auto& rect = GetComponent<Canis::RectTransformComponent>();
+        auto& colorComp = GetComponent<Canis::ColorComponent>();
 
         Log(std::to_string(rectLeftPaddle.position.y));
 
@@ -63,6 +66,8 @@ public:
         {
             GetScene().Instantiate("assets/prefebs/test_character.scene");
         }
+
+        colorComp.color = glm::vec4(0.0f / 255, 255.0f / 255, 255.0f / 255, 1.0f);
     }
 };
 

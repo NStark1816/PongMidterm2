@@ -21,6 +21,7 @@
 #include "ECS/ScriptableEntities/FlyCam.hpp"
 #include "ECS/ScriptableEntities/FPSCounter.hpp"
 #include "ECS/ScriptableEntities/Paddle.hpp"
+#include "ECS/ScriptableEntities/Background.hpp"
 
 #include "ECS/Systems/GameOfLifeSystem.hpp"
 
@@ -48,6 +49,7 @@ int main(int argc, char* argv[])
     app.AddDecodeScriptableEntity(DecodeFlyCam);
     app.AddDecodeScriptableEntity(DecodeFPSCounter);
     app.AddDecodeScriptableEntity(DecodePaddle);
+    app.AddDecodeScriptableEntity(DecodeBackground);
 
     // decode component
     app.AddDecodeComponent(Canis::DecodeTransformComponent);

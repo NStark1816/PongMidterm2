@@ -16,18 +16,19 @@ uniform float TIME;
 void main() {
 	vec2 movedUV = fragmentUV + vec2(TIME, TIME);
 	vec4 textureColor = texture(mySampler, movedUV);
+	color = textureColor;
 
 	//color = textureColor * fragmentColor;
 
 	// Note: make the ball and paddles white and background have no white
 	if(textureColor == vec4(1.0, 1.0, 1.0, 1.0))
 	{
-
+		color = fragmentColor * textureColor;
 	}
 	else
 	{
-
+		
 	}
 
-	color = fragmentColor * textureColor;
+	//color = fragmentColor;
 }
