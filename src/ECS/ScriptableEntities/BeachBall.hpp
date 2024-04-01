@@ -13,6 +13,9 @@ private:
     float       m_timeBetweenAnimation = 3.0f;
     float       m_countDown = 0.0f;
     unsigned int m_animIndex = 0;
+    bool m_hasWallBounced = false;
+    bool m_hasPaddleBounced = false;
+    bool m_gameStarted = false;
     std::vector<glm::vec2> m_spawnPoints = {};
 public:
     unsigned int leftScore = 0;
@@ -25,7 +28,7 @@ public:
     void OnReady()
     {
         m_direction = glm::vec2(1.0f, 0.4f);
-        m_speed = 150.0f;
+        m_speed = 0.0f;
     }
     
     void OnDestroy()
@@ -52,38 +55,78 @@ public:
         float halfSizeX = rect.size.x/2.0f;
         float halfSizeY = rect.size.y/2.0f;
 
+        float LPhalfSizeX = rectLeftPaddle.size.x/2.0f;
+        float LPhalfSizeY = rectLeftPaddle.size.y/2.0f;
+
+        float RPhalfSizeX = rectRightPaddle.size.x/2.0f;
+        float RPhalfSizeY = rectRightPaddle.size.y/2.0f;
+
         if (rect.position.x + halfSizeX >= GetWindow().GetScreenWidth()/2.0f)
         {
             rect.position = vec2(0, 0);
-            m_speed = 150.0f;
+            m_speed = 0.0f;
             rightScore += 1;
             scoreText.text = (std::to_string(leftScore) + " - " + std::to_string(rightScore));
+            m_gameStarted = false;
         } 
         else if(rect.position.x - halfSizeX <= GetWindow().GetScreenWidth()/-2.0f)
         {
             rect.position = vec2(0, 0);
-            m_speed = 150.0f;
+            m_speed = 0.0f;
             leftScore += 1;
             scoreText.text = (std::to_string(leftScore) + " - " + std::to_string(rightScore));
+            m_gameStarted = false;
         }
 
         if (rect.position.y + halfSizeY >= GetWindow().GetScreenHeight()/2.0f ||
                 rect.position.y - halfSizeY <= GetWindow().GetScreenHeight()/-2.0f)
-            m_direction.y *= -1.0f;
+                {
+                    if(!m_hasWallBounced)
+                    {
+                        m_direction.y *= -1.0f;
+                        m_hasWallBounced = true;
+                    }
+                }
+                else
+                {
+                    m_hasWallBounced = false;
+                }
+            
 
+        if(((rect.position.x + halfSizeX >= rectRightPaddle.position.x - RPhalfSizeX) && 
+            (rect.position.x + halfSizeX <= rectRightPaddle.position.x + RPhalfSizeX) &&
+            (rect.position.y + halfSizeY >= rectRightPaddle.position.y - RPhalfSizeY) &&
+            (rect.position.y - halfSizeY <= rectRightPaddle.position.y + RPhalfSizeY)) ||
+            ((rect.position.x - halfSizeX <= rectLeftPaddle.position.x + LPhalfSizeX) && 
+            (rect.position.x - halfSizeX >= rectLeftPaddle.position.x - LPhalfSizeX) &&
+            (rect.position.y + halfSizeY >= rectLeftPaddle.position.y - LPhalfSizeY) &&
+            (rect.position.y - halfSizeY <= rectLeftPaddle.position.y + LPhalfSizeY)))
+            {
+                if(!m_hasPaddleBounced)
+                {
+                    m_direction.x *= -1.0f;
+                    m_speed += 20.0f;
+                    m_hasPaddleBounced = true;
+                }
+                    
+            } else
+            {
+                m_hasPaddleBounced = false;
+            }
         
         rect.position += (m_direction * (m_speed * _dt));
+
+        if(GetInputManager().GetKey(SDL_SCANCODE_RETURN) && !m_gameStarted)
+        {
+            m_gameStarted = true;
+            m_speed = 150.0f;
+        }
 
         if (GetInputManager().JustPressedKey(SDLK_p))
             m_speed += 50.0f;
         
         if (GetInputManager().JustPressedKey(SDLK_r))
             m_speed = 150.0f;
-        
-        if (GetInputManager().JustPressedKey(SDLK_d))
-        {
-            GetScene().Instantiate("assets/prefebs/test_character.scene");
-        }
 
         colorComp.color = glm::vec4(255.0f / 255, 255.0f / 255, 255.0f / 255, 1.0f);
     }

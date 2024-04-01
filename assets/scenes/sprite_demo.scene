@@ -29,7 +29,7 @@ Entities:
       assetId:
         path: "assets/fonts/Antonio-Bold.ttf"
         size: 48
-      text: Sprite Demo
+      text: 0 - 0
       alignment: 0
     Canis::ScriptComponent: ScoreDisplay
     Canis::TagComponent: SCORE
