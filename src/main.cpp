@@ -20,7 +20,8 @@
 #include "ECS/ScriptableEntities/SpawnCube.hpp"
 #include "ECS/ScriptableEntities/FlyCam.hpp"
 #include "ECS/ScriptableEntities/FPSCounter.hpp"
-#include "ECS/ScriptableEntities/Paddle.hpp"
+#include "ECS/ScriptableEntities/LeftPaddle.hpp"
+#include "ECS/ScriptableEntities/RightPaddle.hpp"
 #include "ECS/ScriptableEntities/Background.hpp"
 
 #include "ECS/Systems/GameOfLifeSystem.hpp"
@@ -48,7 +49,8 @@ int main(int argc, char* argv[])
     app.AddDecodeScriptableEntity(DecodeSpawnCube);
     app.AddDecodeScriptableEntity(DecodeFlyCam);
     app.AddDecodeScriptableEntity(DecodeFPSCounter);
-    app.AddDecodeScriptableEntity(DecodePaddle);
+    app.AddDecodeScriptableEntity(DecodeLeftPaddle);
+    app.AddDecodeScriptableEntity(DecodeRightPaddle);
     app.AddDecodeScriptableEntity(DecodeBackground);
 
     // decode component

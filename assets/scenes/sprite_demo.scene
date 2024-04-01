@@ -72,7 +72,7 @@ Entities:
       radius: 128.0
       layer: 0
       mask: 0
-    Canis::ScriptComponent: Paddle
+    Canis::ScriptComponent: LeftPaddle
     Canis::TagComponent: LEFTPADDLE
   - 4:
     Canis::RectTransformComponent:
@@ -94,7 +94,7 @@ Entities:
       radius: 128.0
       layer: 0
       mask: 0
-    Canis::ScriptComponent: Paddle
+    Canis::ScriptComponent: RightPaddle
     Canis::TagComponent: RIGHTPADDLE
   - 5:
     Canis::RectTransformComponent:

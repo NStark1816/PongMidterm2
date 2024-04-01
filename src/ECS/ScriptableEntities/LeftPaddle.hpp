@@ -4,7 +4,7 @@
 #include <Canis/ScriptableEntity.hpp>
 #include <Canis/ECS/Components/RectTransformComponent.hpp>
 
-class Paddle : public Canis::ScriptableEntity
+class LeftPaddle : public Canis::ScriptableEntity
 {
 private:
     glm::vec2   m_direction;
@@ -13,7 +13,7 @@ private:
 public:
     void OnCreate()
     {
-        Canis::Log("Paddle Loaded");
+        Canis::Log("Left Paddle Loaded");
     }
 
     void OnReady()
@@ -63,12 +63,12 @@ public:
     }
 };
 
-bool DecodePaddle(const std::string &_name, Canis::Entity &_entity)
+bool DecodeLeftPaddle(const std::string &_name, Canis::Entity &_entity)
 {
-    if (_name == "Paddle")
+    if (_name == "LeftPaddle")
     {
         Canis::ScriptComponent scriptComponent = {};
-        scriptComponent.Bind<Paddle>();
+        scriptComponent.Bind<LeftPaddle>();
         _entity.AddComponent<Canis::ScriptComponent>(scriptComponent);
         return true;
     }
