@@ -65,6 +65,7 @@ public:
         {
             rect.position = vec2(0, 0);
             m_speed = 0.0f;
+            colorComp.color = glm::vec4(255.0f / 255, 255.0f / 255, 255.0f / 255, 1.0f);
             rightScore += 1;
             scoreText.text = (std::to_string(leftScore) + " - " + std::to_string(rightScore));
             m_gameStarted = false;
@@ -73,6 +74,7 @@ public:
         {
             rect.position = vec2(0, 0);
             m_speed = 0.0f;
+            colorComp.color = glm::vec4(255.0f / 255, 255.0f / 255, 255.0f / 255, 1.0f);
             leftScore += 1;
             scoreText.text = (std::to_string(leftScore) + " - " + std::to_string(rightScore));
             m_gameStarted = false;
@@ -93,23 +95,34 @@ public:
                 }
             
 
-        if(((rect.position.x + halfSizeX >= rectRightPaddle.position.x - RPhalfSizeX) && 
+        if((rect.position.x + halfSizeX >= rectRightPaddle.position.x - RPhalfSizeX) && 
             (rect.position.x + halfSizeX <= rectRightPaddle.position.x + RPhalfSizeX) &&
             (rect.position.y + halfSizeY >= rectRightPaddle.position.y - RPhalfSizeY) &&
-            (rect.position.y - halfSizeY <= rectRightPaddle.position.y + RPhalfSizeY)) ||
-            ((rect.position.x - halfSizeX <= rectLeftPaddle.position.x + LPhalfSizeX) && 
-            (rect.position.x - halfSizeX >= rectLeftPaddle.position.x - LPhalfSizeX) &&
-            (rect.position.y + halfSizeY >= rectLeftPaddle.position.y - LPhalfSizeY) &&
-            (rect.position.y - halfSizeY <= rectLeftPaddle.position.y + LPhalfSizeY)))
+            (rect.position.y - halfSizeY <= rectRightPaddle.position.y + RPhalfSizeY))
             {
                 if(!m_hasPaddleBounced)
                 {
                     m_direction.x *= -1.0f;
                     m_speed += 20.0f;
                     m_hasPaddleBounced = true;
+                    colorComp.color = colorRightPaddle.color;
                 }
                     
-            } else
+            } 
+            else if((rect.position.x - halfSizeX <= rectLeftPaddle.position.x + LPhalfSizeX) && 
+                    (rect.position.x - halfSizeX >= rectLeftPaddle.position.x - LPhalfSizeX) &&
+                    (rect.position.y + halfSizeY >= rectLeftPaddle.position.y - LPhalfSizeY) &&
+                    (rect.position.y - halfSizeY <= rectLeftPaddle.position.y + LPhalfSizeY))
+            {
+                if(!m_hasPaddleBounced)
+                {
+                    m_direction.x *= -1.0f;
+                    m_speed += 20.0f;
+                    m_hasPaddleBounced = true;
+                    colorComp.color = colorLeftPaddle.color;
+                }
+            }
+            else
             {
                 m_hasPaddleBounced = false;
             }
@@ -128,7 +141,6 @@ public:
         if (GetInputManager().JustPressedKey(SDLK_r))
             m_speed = 150.0f;
 
-        colorComp.color = glm::vec4(255.0f / 255, 255.0f / 255, 255.0f / 255, 1.0f);
     }
 };
 

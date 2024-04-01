@@ -65,7 +65,7 @@ Entities:
       scale: 1.0
       depth: 0.1
     Canis::ColorComponent:
-      color: [1.0, 1.0, 1.0, 1.0]
+      color: [0.75, 0.0, 0.75, 1.0]
     Canis::Sprite2DComponent:
       uv: [0.16, 0.0, 0.16, 0.24]
       texture: "assets/textures/beach_ball.png"
@@ -87,7 +87,7 @@ Entities:
       scale: 1.0
       depth: 0.1
     Canis::ColorComponent:
-      color: [1.0, 1.0, 1.0, 1.0]
+      color: [1.0, 0.5, 0.5, 1.0]
     Canis::Sprite2DComponent:
       uv: [0.16, 0.0, 0.16, 0.24]
       texture: "assets/textures/beach_ball.png"
