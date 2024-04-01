@@ -3,6 +3,7 @@
 #include <vector>
 #include <Canis/ScriptableEntity.hpp>
 #include <Canis/ECS/Components/RectTransformComponent.hpp>
+#include <Canis/ECS/Components/TextComponent.hpp>
 
 class BeachBall : public Canis::ScriptableEntity
 {
@@ -14,6 +15,8 @@ private:
     unsigned int m_animIndex = 0;
     std::vector<glm::vec2> m_spawnPoints = {};
 public:
+    unsigned int leftScore = 0;
+    unsigned int rightScore = 0;
     void OnCreate()
     {
         m_countDown = m_timeBetweenAnimation;
@@ -35,24 +38,39 @@ public:
         using namespace Canis;
         Canis::Entity leftPaddle = entity.GetEntityWithTag("LEFTPADDLE");
         Canis::Entity rightPaddle = entity.GetEntityWithTag("RIGHTPADDLE");
+        Canis::Entity scoreDisplay = entity.GetEntityWithTag("SCORE");
         auto& rectLeftPaddle = leftPaddle.GetComponent<Canis::RectTransformComponent>();
         auto& rectRightPaddle = rightPaddle.GetComponent<Canis::RectTransformComponent>();
         auto& colorLeftPaddle = leftPaddle.GetComponent<Canis::ColorComponent>();
+        auto& colorRightPaddle = rightPaddle.GetComponent<Canis::ColorComponent>();
+        auto& scoreText = scoreDisplay.GetComponent<Canis::TextComponent>();
         auto& rect = GetComponent<Canis::RectTransformComponent>();
         auto& colorComp = GetComponent<Canis::ColorComponent>();
 
-        Log(std::to_string(rectLeftPaddle.position.y));
+        Log(std::to_string(rightScore));
 
         float halfSizeX = rect.size.x/2.0f;
         float halfSizeY = rect.size.y/2.0f;
 
-        if (rect.position.x + halfSizeX >= GetWindow().GetScreenWidth()/2.0f ||
-                rect.position.x - halfSizeX <= GetWindow().GetScreenWidth()/-2.0f)
-            m_direction.x *= -1.0f;
+        if (rect.position.x + halfSizeX >= GetWindow().GetScreenWidth()/2.0f)
+        {
+            rect.position = vec2(0, 0);
+            m_speed = 150.0f;
+            rightScore += 1;
+            scoreText.text = (std::to_string(leftScore) + " - " + std::to_string(rightScore));
+        } 
+        else if(rect.position.x - halfSizeX <= GetWindow().GetScreenWidth()/-2.0f)
+        {
+            rect.position = vec2(0, 0);
+            m_speed = 150.0f;
+            leftScore += 1;
+            scoreText.text = (std::to_string(leftScore) + " - " + std::to_string(rightScore));
+        }
 
         if (rect.position.y + halfSizeY >= GetWindow().GetScreenHeight()/2.0f ||
                 rect.position.y - halfSizeY <= GetWindow().GetScreenHeight()/-2.0f)
             m_direction.y *= -1.0f;
+
         
         rect.position += (m_direction * (m_speed * _dt));
 
@@ -67,7 +85,7 @@ public:
             GetScene().Instantiate("assets/prefebs/test_character.scene");
         }
 
-        colorComp.color = glm::vec4(0.0f / 255, 255.0f / 255, 255.0f / 255, 1.0f);
+        colorComp.color = glm::vec4(255.0f / 255, 255.0f / 255, 255.0f / 255, 1.0f);
     }
 };
 

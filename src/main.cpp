@@ -23,6 +23,7 @@
 #include "ECS/ScriptableEntities/LeftPaddle.hpp"
 #include "ECS/ScriptableEntities/RightPaddle.hpp"
 #include "ECS/ScriptableEntities/Background.hpp"
+#include "ECS/ScriptableEntities/ScoreDisplay.hpp"
 
 #include "ECS/Systems/GameOfLifeSystem.hpp"
 
@@ -52,6 +53,7 @@ int main(int argc, char* argv[])
     app.AddDecodeScriptableEntity(DecodeLeftPaddle);
     app.AddDecodeScriptableEntity(DecodeRightPaddle);
     app.AddDecodeScriptableEntity(DecodeBackground);
+    app.AddDecodeScriptableEntity(DecodeScoreDisplay);
 
     // decode component
     app.AddDecodeComponent(Canis::DecodeTransformComponent);

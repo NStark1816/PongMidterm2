@@ -31,6 +31,8 @@ Entities:
         size: 48
       text: Sprite Demo
       alignment: 0
+    Canis::ScriptComponent: ScoreDisplay
+    Canis::TagComponent: SCORE
   - 2:
     Canis::RectTransformComponent:
       active: true
